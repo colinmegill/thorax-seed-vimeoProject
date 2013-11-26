@@ -10,6 +10,7 @@ require([
     // and initialize all routers here, the callback
     // `next` is provided in case the operations
     // needed are aysynchronous
+    window.VIMEOVIDEOS = {};
     new TodoListRouter;
 
     next();
