@@ -3,13 +3,8 @@
 
 {{#collection}}
 
-	<iframe src="//player.vimeo.com/video/{{id}}?color=03852e" width="500" height="281" frameborder="0" 	webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-	
-	<p> Id: {{id}} </p>
-	<p>Here's the title: {{title}}</p>
-	<p>Here's the description: {{{description}}}</p>
-	<p>It was uploaded on {{upload_date}}</p>
-	<p>It was made by: {{user_name}}, whose channel you can visit <a href="{{user_url}}"> here! </a> </p>
+	{{view firstchild}}
+	{{view secondchild}}
 
 {{/collection}}
 

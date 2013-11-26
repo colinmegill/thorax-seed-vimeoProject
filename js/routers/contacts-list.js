@@ -12,11 +12,16 @@ define([
     routes: {
       "foo1": "index",
       "foo2/:id": "details",
-      "" : "vimeoVideos"
+      "" : "vimeoVideos",
+      "videoDetailsView/:id" : "videoDetailsView"
     },
-    vimeoVideos: function() {
+    videoDetailsView: function(id){
 
-      VIMEOVIDEOS.vimeoVideosCollection = new VimeoVideos()
+      var videoDetailsView = new VimeoVideoDetailView({
+        model: VIMEOVIDEOS.vimeoVideosCollection.get(id)
+      })
+
+      RootView.getInstance().setView(videoDetailsView)
 
       $.ajax({
         url: "http://vimeo.com/api/v2/channel/kinetictypography/videos.json" 
