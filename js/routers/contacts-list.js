@@ -7,8 +7,16 @@ define([
 ], function(Backbone, RootView, ContactCollection, ContactListIndexView, ContactListDetailView) {
   return Backbone.Router.extend({
     routes: {
-      "": "index",
-      "details/:id": "details"
+      "foo1": "index",
+      "foo2/:id": "details",
+      "" : "vimeoVideos"
+    },
+    vimeoVideos: function() {
+      $.ajax({
+        url: "http://vimeo.com/api/v2/channel/kinetictypography/videos.json" 
+      }).done(function(data){
+        console.dir(data)
+      })
     },
     index: function() {
       var contacts = new ContactCollection();
