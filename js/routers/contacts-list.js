@@ -3,8 +3,11 @@ define([
   'views/root',
   'collections/contacts',
   'views/contacts-list/index',
-  'views/contacts-list/contact-details'
-], function(Backbone, RootView, ContactCollection, ContactListIndexView, ContactListDetailView) {
+  'views/contacts-list/contact-details',
+  'views/vimeo-video-detail-view',
+  'views/vimeo-video-view',
+  'collections/vimeo-videos',
+], function(Backbone, RootView, ContactCollection, ContactListIndexView, ContactListDetailView, VimeoVideoDetailView, VimeoVideoView, VimeoVideos) {
   return Backbone.Router.extend({
     routes: {
       "foo1": "index",
@@ -12,10 +15,20 @@ define([
       "" : "vimeoVideos"
     },
     vimeoVideos: function() {
+
+      VIMEOVIDEOS.vimeoVideosCollection = new VimeoVideos()
+
       $.ajax({
         url: "http://vimeo.com/api/v2/channel/kinetictypography/videos.json" 
       }).done(function(data){
-        console.dir(data)
+
+        VIMEOVIDEOS.vimeoVideosCollection.add(data)
+        var videosView = new VimeoVideoView({
+          collection: VIMEOVIDEOS.vimeoVideosCollection
+        });
+
+        RootView.getInstance().setView(videosView);
+
       })
     },
     index: function() {
